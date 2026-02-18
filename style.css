@@ -1,0 +1,307 @@
+/* ═══════════════════════════════════════
+   RESET & BASE
+═══════════════════════════════════════ */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --orange: #ff6600;
+  --red:    #ff3300;
+  --gold:   #f5d080;
+  --dark:   rgba(0,0,0,0.75);
+}
+
+html, body {
+  width: 100%;
+  min-height: 100vh;
+  background: #000;
+  font-family: 'Special Elite', cursive;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* ═══════════════════════════════════════
+   START OVERLAY
+═══════════════════════════════════════ */
+#startOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background: radial-gradient(ellipse at center, #0d0000 0%, #000 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: opacity 0.6s;
+}
+
+#startOverlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#startBox {
+  text-align: center;
+  animation: pulse 2s infinite;
+}
+
+#startTitle {
+  font-size: clamp(5rem, 15vw, 10rem);
+  margin-bottom: 20px;
+  filter: drop-shadow(0 0 30px rgba(255,68,0,0.9));
+}
+
+#startSub {
+  font-family: 'Creepster', cursive;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  color: var(--orange);
+  letter-spacing: 4px;
+  text-shadow: 0 0 20px var(--red);
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1);    opacity: 1;   }
+  50%       { transform: scale(1.04); opacity: 0.8; }
+}
+
+/* ═══════════════════════════════════════
+   BACKGROUND
+═══════════════════════════════════════ */
+#bgPhoto {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  object-position: center top;
+  filter: brightness(0.38) saturate(0.7);
+  z-index: 0;
+  pointer-events: none;
+}
+
+#scanlines {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px, transparent 3px,
+    rgba(0,0,0,0.12) 3px, rgba(0,0,0,0.12) 4px
+  );
+  pointer-events: none;
+}
+
+#vignette {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  background: radial-gradient(ellipse at center, transparent 20%, rgba(0,0,0,0.85) 100%);
+  pointer-events: none;
+}
+
+/* ═══════════════════════════════════════
+   SOUND INDICATOR
+═══════════════════════════════════════ */
+#soundDot {
+  position: fixed;
+  top: 16px;
+  right: 20px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--orange);
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+#soundDot.active { opacity: 1; }
+
+#soundDot .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--red);
+  animation: blink 0.9s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.1; }
+}
+
+/* ═══════════════════════════════════════
+   MAIN CONTENT
+═══════════════════════════════════════ */
+#content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px 60px;
+  gap: 20px;
+  opacity: 0;
+  animation: fadeUp 1.2s 0.3s ease-out forwards;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ═══════════════════════════════════════
+   GREETING
+═══════════════════════════════════════ */
+#greeting {
+  font-family: 'Creepster', cursive;
+  font-size: clamp(3rem, 9vw, 8rem);
+  color: var(--orange);
+  text-shadow:
+    0 0 40px var(--red),
+    0 0 80px rgba(255,34,0,0.4),
+    2px 2px 0 #000;
+  letter-spacing: 4px;
+  text-align: center;
+  animation: flicker 5s infinite;
+}
+
+@keyframes flicker {
+  0%,100% { opacity: 1; }
+  90%     { opacity: 1; }
+  91%     { opacity: 0.2; }
+  92%     { opacity: 1; }
+  95%     { opacity: 0.5; }
+  96%     { opacity: 1; }
+}
+
+/* ═══════════════════════════════════════
+   INVITE TEXT
+═══════════════════════════════════════ */
+#inviteText {
+  font-size: clamp(1rem, 2.2vw, 1.8rem);
+  color: var(--gold);
+  text-align: center;
+  max-width: 760px;
+  line-height: 1.85;
+  text-shadow: 1px 1px 6px #000, 0 0 20px rgba(255,102,0,0.4);
+}
+
+/* ═══════════════════════════════════════
+   SELFIE SECTION
+═══════════════════════════════════════ */
+#selfieSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: min(380px, 90vw);
+}
+
+#selfieLabel {
+  font-family: 'Creepster', cursive;
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  color: var(--orange);
+  text-shadow: 0 0 15px var(--red);
+  letter-spacing: 2px;
+}
+
+#selfieImg {
+  width: 100%;
+  max-width: 380px;
+  border-radius: 10px;
+  border: 2px solid var(--orange);
+  box-shadow: 0 0 30px rgba(255,68,0,0.6);
+  display: none;
+  transform: scaleX(-1); /* mirror like selfie */
+}
+
+#selfieImg.show { display: block; }
+
+#selfieStatus {
+  font-size: 0.85rem;
+  color: #aaa;
+  font-style: italic;
+  text-align: center;
+}
+
+/* hidden video used for capture */
+#camVideo {
+  position: fixed;
+  top: -9999px;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ═══════════════════════════════════════
+   INFO PANEL
+═══════════════════════════════════════ */
+#infoPanel {
+  background: var(--dark);
+  border: 1px solid rgba(255,102,0,0.4);
+  border-radius: 12px;
+  padding: 16px 26px;
+  backdrop-filter: blur(10px);
+  font-size: clamp(0.7rem, 1.3vw, 0.95rem);
+  color: #ccc;
+  line-height: 2.1;
+  max-width: 680px;
+  width: 90%;
+}
+
+#infoPanel .row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+#infoPanel .lbl {
+  color: #ff8844;
+  min-width: 185px;
+  font-weight: bold;
+}
+
+#infoPanel .val {
+  color: #fff;
+  word-break: break-all;
+}
+
+/* ═══════════════════════════════════════
+   LOCATION LABEL
+═══════════════════════════════════════ */
+#locationLabel {
+  font-size: clamp(0.78rem, 1.4vw, 1rem);
+  color: #ff9955;
+  text-align: center;
+  text-shadow: 0 0 10px var(--red);
+  min-height: 1.4em;
+}
+
+/* ═══════════════════════════════════════
+   MAP
+═══════════════════════════════════════ */
+#mapWrap {
+  width: min(640px, 90vw);
+  height: min(230px, 28vh);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid rgba(255,102,0,0.55);
+  box-shadow: 0 0 36px rgba(255,68,0,0.45);
+  opacity: 0;
+  transition: opacity 1s 0.3s;
+}
+
+#mapWrap.visible { opacity: 1; }
+
+#map {
+  width: 100%;
+  height: 100%;
+}

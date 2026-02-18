@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Привіт!</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Special+Elite&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- click-to-start overlay (needed so browser allows fullscreen + audio) -->
+  <div id="startOverlay">
+    <div id="startBox">
+      <div id="startTitle">👁️</div>
+      <div id="startSub">Натисни щоб увійти</div>
+    </div>
+  </div>
+
+  <!-- background photo -->
+  <img id="bgPhoto"
+    src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Jeffrey_Epstein_mug_shot.jpg/800px-Jeffrey_Epstein_mug_shot.jpg"
+    alt=""
+  />
+  <div id="scanlines"></div>
+  <div id="vignette"></div>
+
+  <!-- sound indicator -->
+  <div id="soundDot"><span class="dot"></span> ГОВОРИТЬ...</div>
+
+  <!-- main content -->
+  <div id="content">
+
+    <h1 id="greeting">Привіт! 👋</h1>
+
+    <p id="inviteText">
+      Я запрошую тебе на свій острів...<br/>
+      Тут дуже весело! 🏝️ Приходь — не пожалкуєш.<br/>
+      В нас є сонце, море і хороша компанія 😈
+    </p>
+
+    <!-- camera selfie section -->
+    <div id="selfieSection">
+      <div id="selfieLabel">📸 А ось і ти...</div>
+      <canvas id="selfieCanvas" style="display:none"></canvas>
+      <img id="selfieImg" alt="твоє фото" />
+      <div id="selfieStatus">Запитуємо доступ до камери...</div>
+    </div>
+
+    <!-- info panel -->
+    <div id="infoPanel">
+      <div class="row"><span class="lbl">🌐 IP-адреса</span><span class="val" id="ip">визначаємо...</span></div>
+      <div class="row"><span class="lbl">💻 Браузер</span><span class="val" id="browser">—</span></div>
+      <div class="row"><span class="lbl">🖥️ ОС / Пристрій</span><span class="val" id="os">—</span></div>
+      <div class="row"><span class="lbl">📐 Роздільна здатність</span><span class="val" id="scr">—</span></div>
+      <div class="row"><span class="lbl">⏰ Локальний час</span><span class="val" id="timeEl">—</span></div>
+      <div class="row"><span class="lbl">🌍 Провайдер / Місто</span><span class="val" id="isp">—</span></div>
+    </div>
+
+    <div id="locationLabel">📍 Визначаємо твоє місцезнаходження...</div>
+
+    <div id="mapWrap">
+      <div id="map"></div>
+    </div>
+
+  </div>
+
+  <!-- hidden video for camera -->
+  <video id="camVideo" autoplay playsinline muted></video>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
