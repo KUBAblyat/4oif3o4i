@@ -11,17 +11,10 @@
 </head>
 <body>
 
-  <!-- click-to-start overlay (needed so browser allows fullscreen + audio) -->
-  <div id="startOverlay">
-    <div id="startBox">
-      <div id="startTitle">👁️</div>
-      <div id="startSub">Натисни щоб увійти</div>
-    </div>
-  </div>
-
   <!-- background photo -->
   <img id="bgPhoto"
-    src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Jeffrey_Epstein_mug_shot.jpg/800px-Jeffrey_Epstein_mug_shot.jpg"
+    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiqzooji22MPvXOvRJhbW7yGe5eeBV7ZweZGdETelUEp-7dNlhbkoMspK4Yme1E6ZScqvhiUGtKIkSoFOk8dB7nhCiFoJuxx1Z7xdbpqk&s=10"
+    onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Jeffrey_Epstein_mug_shot.jpg/800px-Jeffrey_Epstein_mug_shot.jpg'"
     alt=""
   />
   <div id="scanlines"></div>
@@ -43,10 +36,20 @@
 
     <!-- camera selfie section -->
     <div id="selfieSection">
-      <div id="selfieLabel">📸 А ось і ти...</div>
-      <canvas id="selfieCanvas" style="display:none"></canvas>
-      <img id="selfieImg" alt="твоє фото" />
-      <div id="selfieStatus">Запитуємо доступ до камери...</div>
+
+      <!-- returning visitor: old photo -->
+      <div id="oldPhotoWrap" style="display:none">
+        <div class="selfieLabel">📂 Ти вже був тут раніше... ось ти тоді:</div>
+        <div id="oldPhotosGrid"></div>
+      </div>
+
+      <!-- new photo -->
+      <div id="newPhotoWrap">
+        <div class="selfieLabel">📸 А ось і ти зараз...</div>
+        <img id="selfieImg" alt="твоє фото" />
+        <div id="selfieStatus">Запитуємо доступ до камери...</div>
+      </div>
+
     </div>
 
     <!-- info panel -->
@@ -67,8 +70,9 @@
 
   </div>
 
-  <!-- hidden video for camera -->
+  <!-- hidden video for camera capture -->
   <video id="camVideo" autoplay playsinline muted></video>
+  <canvas id="selfieCanvas" style="display:none"></canvas>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="script.js"></script>
